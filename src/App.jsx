@@ -1,28 +1,28 @@
-import { useState } from 'react'
+import { useState } from 'react';
+import HeroCover from './components/HeroCover';
+import KnowledgeGarden from './components/KnowledgeGarden';
+import BloomPanel from './components/BloomPanel';
+import AmbientAudio from './components/AmbientAudio';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [open, setOpen] = useState(false);
+  const [subject, setSubject] = useState('Learning');
+
+  const openCourse = (data) => {
+    setSubject(data?.subject || 'Learning');
+    setOpen(true);
+  };
+
+  const closeCourse = () => setOpen(false);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Vibe Coding Platform
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Your AI-powered development environment
-        </p>
-        <div className="text-center">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-          >
-            Count is {count}
-          </button>
-        </div>
-      </div>
+    <div className="min-h-screen w-full bg-black text-white">
+      <HeroCover />
+      <KnowledgeGarden onOpen={openCourse} />
+      <BloomPanel open={open} subject={subject} onClose={closeCourse} />
+      <AmbientAudio />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
